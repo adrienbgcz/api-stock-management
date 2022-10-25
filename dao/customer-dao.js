@@ -43,7 +43,7 @@ export default {
         const phoneNumber = customer.phone_number
 
         try {
-            const query = await db.query('UPDATE customer SET company_name = $1, siret = $2, phone_number = $3, WHERE id = $4', [companyName, siret, phoneNumber, idCustomer])
+            const query = await db.query('UPDATE customer SET company_name = $1, siret = $2, phone_number = $3 WHERE id = $4', [companyName, siret, phoneNumber, idCustomer])
         } catch(e) {
             console.error(e)
             throw e

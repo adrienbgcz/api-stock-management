@@ -4,6 +4,7 @@ const port = 5000
 import cors from  'cors'
 
 import customerEndpoint from './controller/customer-controller.js'
+import deviceEndpoint from './controller/device-controller.js'
 
 
 app.use(express.json())
@@ -16,6 +17,7 @@ app.get('/', (req, res) => {
 
 
 app.use('/', customerEndpoint)
+app.use('/', deviceEndpoint)
 
 
 app.listen(port, () => {

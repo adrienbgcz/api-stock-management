@@ -16,7 +16,7 @@ export default {
     async getCustomer(id) {
         try {
             let customer = await customerDao.findCustomerById(id)
-            return user
+            return customer
         } catch (e) {
             console.error(e)
             throw e
