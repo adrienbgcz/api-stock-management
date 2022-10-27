@@ -6,9 +6,13 @@ import cors from  'cors'
 import customerEndpoint from './controller/customer-controller.js'
 import deviceEndpoint from './controller/device-controller.js'
 
+var corsOptions = {
+    origin: "https://flutter-stock-management.herokuapp.com:3000"
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.json())
-app.use(cors());
 
 
 app.get('/', (req, res) => {
