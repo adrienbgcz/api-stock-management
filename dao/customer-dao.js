@@ -53,7 +53,7 @@ export default {
     async getAllBillsByCustomer(id) {
         let bills = []
         try {
-            const query = await db.query('SELECT DISTINCT bill.id, bill.bill_date FROM transaction JOIN customer ON transaction.customer_id = customer.id JOIN bill ON bill.id = transaction.bill_id WHERE customer.id = $1', [id])
+            const query = await db.query('SELECT bill.id, bill.bill_date, SUM(price*quantity) as total FROM transaction JOIN customer ON transaction.customer_id = customer.id JOIN bill ON bill.id = transaction.bill_id JOIN device ON device.id = transaction.device_id WHERE customer.id = $1 GROUP BY bill.id', [id])
             bills = query.rows;
         } catch(e) {
             console.error(e)
