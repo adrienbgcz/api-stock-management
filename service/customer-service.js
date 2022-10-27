@@ -41,5 +41,26 @@ export default {
             console.error(e)
             throw e
         }
+    },
+
+    async getAllBillsByCustomer(id) {
+        try {
+            let bills = await customerDao.getAllBillsByCustomer(id)
+            return bills
+        } catch (e) {
+            console.error(e)
+            throw e
+        }
+    },
+
+    async getAllTransactionsByBillAndCustomer(customerId, billId) {
+        try {
+            let bills = await customerDao.getAllTransactionsByBillAndCustomer(customerId, billId)
+            return bills
+        } catch (e) {
+            console.error(e)
+            throw e
+        }
+
     }
 }

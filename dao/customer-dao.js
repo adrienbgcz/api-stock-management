@@ -48,5 +48,30 @@ export default {
             console.error(e)
             throw e
         }
-    }
+    },
+
+    async getAllBillsByCustomer(id) {
+        let bills = []
+        try {
+            const query = await db.query('SELECT DISTINCT bill.id, bill.bill_date FROM transaction JOIN customer ON transaction.customer_id = customer.id JOIN bill ON bill.id = transaction.bill_id WHERE customer.id = $1', [id])
+            bills = query.rows;
+        } catch(e) {
+            console.error(e)
+            throw e
+        }
+        return bills;
+    },
+
+    async getAllTransactionsByBillAndCustomer(customerId, billId) {
+        let transactions = []
+
+        try {
+            const query = await db.query('SELECT device.name, device.price, transaction.quantity FROM transaction JOIN customer ON transaction.customer_id = customer.id JOIN bill ON bill.id = transaction.bill_id JOIN device ON device.id = transaction.device_id WHERE customer.id = $1 AND bill.id = $2', [customerId, billId])
+            transactions = query.rows;
+        } catch(e) {
+            console.error(e)
+            throw e
+        }
+        return transactions;
+    },
 }
