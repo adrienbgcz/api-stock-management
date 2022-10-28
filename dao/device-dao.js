@@ -1,3 +1,4 @@
+import { query } from "express";
 import db from "../connectionDb/db.js";
 
 
@@ -36,11 +37,14 @@ export default {
         const picture = device.picture
 
         try {
-            const query = await db.query('INSERT INTO device (name, price, stock_quantity, serial_number, picture) VALUES ($1, $2, $3, $4, $5)', [name, price, stockQuantity, serialNumber, picture])
+            const query = await db.query('INSERT INTO device (name, price, stock_quantity, serial_number, picture) VALUES ($1, $2, $3, $4, $5) RETURNING "id"', [name, price, stockQuantity, serialNumber, picture])
+            return query.rows[0].id
         } catch(e) {
             console.error(e)
             throw e
         }
+
+        
     },
     async putDevice(device, idDevice) {
         const name = device.name

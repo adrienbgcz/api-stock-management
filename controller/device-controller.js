@@ -29,15 +29,13 @@ router.get('/devices/:id', async (req, res) => {
 })
 
 router.post('/devices', async (req, res) => {
-    let device = {}
     try {
-        device = await deviceService.createDevice(req.body);
-        res.status(200).send()
+        const id = await deviceService.createDevice(req.body);
+        res.json(id)
     } catch (e) {
         console.error(e)
         res.status(500).send('Internal server error')
     }
-
 })
 
 router.put('/devices/:id', async (req, res) => {
