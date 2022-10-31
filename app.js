@@ -8,7 +8,7 @@ import deviceEndpoint from "./controller/device-controller.js";
 import billEndpoint from "./controller/bill-controller.js";
 import transactionEndpoint from "./controller/transaction-controller.js";
 
-app.use(cors(corsOptions));
+app.use(cors());
 
 app.use(express.json());
 
