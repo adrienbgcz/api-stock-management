@@ -1,36 +1,36 @@
 import express from "express";
-import deviceService from "../service/device-service.js";
+import billService from "../service/bill-service.js";
 const router = express.Router();
 
 
-router.get('/devices', async (req, res) => {
-    let devices = []
+router.get('/bills', async (req, res) => {
+    let bills = []
     try {
-        devices = await deviceService.getDevices();
+        bills = await billService.getBills();
 
     } catch (e) {
         console.error(e)
         res.status(500).send('Internal server error')
     }
-    res.json(devices);
+    res.json(bills);
 })
 
 
-router.get('/devices/:id', async (req, res) => {
-    let device = {}
+router.get('/bills/:id', async (req, res) => {
+    let bill = {}
     try {
-        device = await deviceService.getDevice(req.params.id);
-
+        bill = await billService.getBill(req.params.id);
     } catch (e) {
         console.error(e)
         res.status(500).send('Internal server error')
     }
-    res.json(device);
+    res.json(bill);
 })
 
-router.post('/devices', async (req, res) => {
+router.post('/bills', async (req, res) => {
     try {
-        const id = await deviceService.createDevice(req.body);
+        console.log(req.body)
+        const id = await billService.createBill(req.body);
         res.json(id)
     } catch (e) {
         console.error(e)
@@ -38,10 +38,10 @@ router.post('/devices', async (req, res) => {
     }
 })
 
-router.put('/devices/:id', async (req, res) => {
-    let device = {}
+router.put('/bills/:id', async (req, res) => {
+    let bill = {}
     try {
-        device = await deviceService.updateDevice(req.body, req.params.id);
+        bill = await billService.updateBill(req.body, req.params.id);
         res.status(200).send()
     } catch (e) {
         console.error(e)

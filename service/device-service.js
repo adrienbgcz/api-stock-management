@@ -27,7 +27,8 @@ export default {
 
     async createDevice(device) {
         try {
-            let deviceToCreate = await deviceDao.postDevice(device)
+            let id = await deviceDao.postDevice(device)
+            return id;
         } catch (e) {
             console.error(e)
             throw e

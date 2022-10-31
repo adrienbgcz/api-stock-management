@@ -5,6 +5,8 @@ import cors from  'cors'
 
 import customerEndpoint from './controller/customer-controller.js'
 import deviceEndpoint from './controller/device-controller.js'
+import billEndpoint from './controller/bill-controller.js'
+import transactionEndpoint from './controller/transaction-controller.js'
 
 var corsOptions = {
     origin: "https://flutter-stock-management.herokuapp.com:3000"
@@ -22,6 +24,8 @@ app.get('/', (req, res) => {
 
 app.use('/', customerEndpoint)
 app.use('/', deviceEndpoint)
+app.use('/', billEndpoint)
+app.use('/', transactionEndpoint)
 
 
 app.listen(port, () => {
