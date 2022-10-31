@@ -8,10 +8,6 @@ import deviceEndpoint from "./controller/device-controller.js";
 import billEndpoint from "./controller/bill-controller.js";
 import transactionEndpoint from "./controller/transaction-controller.js";
 
-var corsOptions = {
-  origin: "https://flutter-stock-management.herokuapp.com",
-};
-
 app.use(cors(corsOptions));
 
 app.use(express.json());
