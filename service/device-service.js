@@ -13,9 +13,10 @@ export default {
 
     },
 
-    async getDevice(id) {
+
+    async getDeviceByIdOrSerialNumber(idOrSerialNumber) {
         try {
-            let device = await deviceDao.findDeviceById(id)
+            let device = await deviceDao.findDeviceByIdOrSerialNumber(idOrSerialNumber)
             return device
         } catch (e) {
             console.error(e)
@@ -23,7 +24,6 @@ export default {
         }
 
     },
-
 
     async createDevice(device) {
         try {

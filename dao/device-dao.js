@@ -17,11 +17,16 @@ export default {
         return devices;
     },
 
-    async findDeviceById(id) {
+    async findDeviceByIdOrSerialNumber(idOrSerialNumber) {
         let device = []
         try {
-            const query = await db.query('SELECT * FROM device WHERE id = $1', [id])
-            device = query.rows;
+            if(isNaN(parseInt(idOrSerialNumber))) {
+                const query = await db.query('SELECT * FROM device WHERE serial_number = $1', [idOrSerialNumber])
+                device = query.rows;
+            } else {
+                const query = await db.query('SELECT * FROM device WHERE id = $1', [idOrSerialNumber])
+                device = query.rows;
+            }
         } catch(e) {
             console.error(e)
             throw e

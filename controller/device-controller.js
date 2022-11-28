@@ -16,10 +16,10 @@ router.get('/devices', async (req, res) => {
 })
 
 
-router.get('/devices/:id', async (req, res) => {
+router.get('/devices/:idOrSerialNumber', async (req, res) => {
     let device = {}
     try {
-        device = await deviceService.getDevice(req.params.id);
+        device = await deviceService.getDeviceByIdOrSerialNumber(req.params.idOrSerialNumber);
 
     } catch (e) {
         console.error(e)
@@ -27,6 +27,12 @@ router.get('/devices/:id', async (req, res) => {
     }
     res.json(device);
 })
+
+
+
+
+
+
 
 router.post('/devices', async (req, res) => {
     try {
