@@ -20,7 +20,7 @@ export default {
     async findDeviceByIdOrSerialNumber(idOrSerialNumber) {
         let device = []
         try {
-            if(isNaN(parseInt(idOrSerialNumber))) {
+            if(isNaN(idOrSerialNumber)) {
                 const query = await db.query('SELECT * FROM device WHERE serial_number = $1', [idOrSerialNumber])
                 device = query.rows;
             } else {
