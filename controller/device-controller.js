@@ -19,7 +19,8 @@ router.get('/devices', async (req, res) => {
 router.get('/devices/:idOrSerialNumber', async (req, res) => {
     let device = {}
     try {
-        device = await deviceService.getDeviceByIdOrSerialNumber(req.params.idOrSerialNumber);
+        const isScan = req.query.scan;
+        device = await deviceService.getDeviceByIdOrSerialNumber(isScan, req.params.idOrSerialNumber);
 
     } catch (e) {
         console.error(e)
