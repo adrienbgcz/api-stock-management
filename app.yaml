@@ -1,3 +1,5 @@
+runtime: nodejs
+
 env_variables:
   DB_USER: "enzoavlt_stock_management"
   DB_HOST: "postgresql-enzoavlt.alwaysdata.net"
