@@ -1,12 +1,14 @@
 import express from "express";
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3003;
 import cors from "cors";
 
 import customerEndpoint from "./controller/customer-controller.js";
 import deviceEndpoint from "./controller/device-controller.js";
 import billEndpoint from "./controller/bill-controller.js";
 import transactionEndpoint from "./controller/transaction-controller.js";
+import userEndpoint from "./controller/user-controller.js";
+
 
 app.use(cors());
 
@@ -16,6 +18,8 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
+app.use("/", userEndpoint)
+app.use("/", loginUserEndpoint)
 app.use("/", customerEndpoint);
 app.use("/", deviceEndpoint);
 app.use("/", billEndpoint);

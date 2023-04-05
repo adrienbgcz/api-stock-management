@@ -1,10 +1,10 @@
-import userMerchantDao from "../dao/user-merchant-dao.js"
+import userDao from "../dao/user-dao.js"
 
 export default {
 
-    async getUserMerchant(id) {
+    /*async getUserMerchant(id) {
         try {
-            let user = await userMerchantDao.findUserMerchantById(id)
+            let user = await userDao.findUserMerchantById(id)
             return user
         } catch (e) {
             console.error(e)
@@ -16,30 +16,30 @@ export default {
 
     async getUsersMerchants() {
         try {
-            let users = await userMerchantDao.findAllUsersMerchants()
+            let users = await userDao.findAllUsersMerchants()
             return users
         } catch (e) {
             console.error(e)
             throw e
         }
 
-    },
+    },*/
 
-    async createUserMerchant(user) {
+    async createUser(user) {
         try {
-            let userToCreate = await userMerchantDao.postUserMerchant(user)
+            let userToCreate = await userDao.postUser(user)
         } catch (e) {
             console.error(e)
             throw e
         }
     },
 
-    async updateUserMerchant(user, id) {
+    /*async updateUserMerchant(user, id) {
         try {
             let userToUpdate = await userMerchantDao.putUserMerchant(user, id)
         } catch (e) {
             console.error(e)
             throw e
         }
-    }
+    }*/
 }

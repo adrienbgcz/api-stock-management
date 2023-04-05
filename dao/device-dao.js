@@ -35,6 +35,7 @@ export default {
     },
 
     async postDevice(device) {
+        console.log(device)
         const name = device.name
         const price = device.price
         const stockQuantity = device.stock_quantity
