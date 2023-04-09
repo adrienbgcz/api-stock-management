@@ -2,19 +2,23 @@ import userDao from "../dao/user-dao.js"
 
 export default {
 
-    /*async getUserMerchant(id) {
+    async getUser(id) {
         try {
-            let user = await userDao.findUserMerchantById(id)
-            return user
+            let user = await userDao.findUserById(id)
+            console.log(user)
+            return {
+                userId: user.id,
+                email: user.email,
+                pseudo: user.pseudo,
+            }
         } catch (e) {
             console.error(e)
             throw e
         }
-
     },
 
 
-    async getUsersMerchants() {
+    /*async getUsersMerchants() {
         try {
             let users = await userDao.findAllUsersMerchants()
             return users

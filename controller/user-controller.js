@@ -13,20 +13,20 @@ import userServices from '../service/user-service.js'
         res.status(500).send('Internal server error')
     }
     res.json(users);
-})
+})*/
 
 
 router.get('/users/:id', async (req, res) => {
     let user = {}
     try {
         user = await userServices.getUser(req.params.id);
-
+        console.log(user)
     } catch (e) {
         console.error(e)
         res.status(500).send('Internal server error')
     }
     res.json(user);
-})*/
+})
 
 router.post('/users', async (req, res) => {
     let user = {}

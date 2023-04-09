@@ -8,6 +8,8 @@ import deviceEndpoint from "./controller/device-controller.js";
 import billEndpoint from "./controller/bill-controller.js";
 import transactionEndpoint from "./controller/transaction-controller.js";
 import userEndpoint from "./controller/user-controller.js";
+import loginEndpoint from "./controller/login-controller.js"
+import auth from "./middleware/auth.js"
 
 
 app.use(cors());
@@ -18,8 +20,9 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
+app.use("/", loginEndpoint)
 app.use("/", userEndpoint)
-app.use("/", loginUserEndpoint)
+app.use('/', auth.authenticateToken)
 app.use("/", customerEndpoint);
 app.use("/", deviceEndpoint);
 app.use("/", billEndpoint);

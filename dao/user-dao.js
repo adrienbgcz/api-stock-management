@@ -2,11 +2,11 @@ import db from '../connectionDb/db.js'
 import bcrypt from 'bcrypt'
 
 export default {
-    /*async findUserMerchantById(id) {
+    async findUserById(id) {
         let user = []
         try {
-            const query = await db.query('SELECT * FROM user_merchant WHERE id = $1', [id])
-            user = query.rows;
+            const query = await db.query('SELECT * FROM "user" WHERE id = $1', [id])
+            user = query.rows[0];
         } catch(e) {
             console.error(e)
             throw e
@@ -14,7 +14,7 @@ export default {
         return user;
     },
 
-    async findAllUsersMerchants() {
+    /*async findAllUsersMerchants() {
         let users = []
         try {
             const query = await db.query('SELECT * FROM user_merchant')
@@ -26,14 +26,12 @@ export default {
         return users;
     },*/
     async postUser(user) {
-        console.log(user)
         const email = user.email
+        const pseudo = user.pseudo
         const password = await bcrypt.hash(user.password, 10)
 
-        console.log(email, password)
-
         try {
-            const query = await db.query('INSERT INTO "user" (email, password) VALUES ($1, $2)', [email, password])
+            const query = await db.query('INSERT INTO "user" (email, password, pseudo) VALUES ($1, $2, $3)', [email, password, pseudo])
         } catch(e) {
             console.error(e)
             throw e
