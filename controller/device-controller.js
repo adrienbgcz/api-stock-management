@@ -57,4 +57,14 @@ router.put('/devices/:id', async (req, res) => {
 
 })
 
+router.delete("/:id", async (req, res) => {
+    try {
+        await deviceService.delete(parseInt(req.params.id))
+    } catch (error) {
+        console.error(error)
+        res.status(500).send('Internal server error')
+    }
+    res.status(200);
+});
+
 export default router
