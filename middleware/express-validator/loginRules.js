@@ -4,7 +4,6 @@ const { body } = validator
 
 export default {
     validationRules() {
-        console.log("lààà")
         return [
             body("email")
                 .exists().withMessage("Login is empty")

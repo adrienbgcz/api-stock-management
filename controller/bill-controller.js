@@ -29,7 +29,6 @@ router.get('/bills/:id', async (req, res) => {
 
 router.post('/bills', async (req, res) => {
     try {
-        console.log(req.body)
         const id = await billService.createBill(req.body);
         res.json(id)
     } catch (e) {

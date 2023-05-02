@@ -11,12 +11,13 @@ router.post('/login', loginRules.validationRules(), validator.validate, async (r
     try {
         let user = await loginServices.login(req.body.email, req.body.password);
         if(user === false) res.status(401).json({ message: 'Identifiants incorrects' })
+
         res.status(200).json({
             user,
             token: jwt.sign(
                 { userId : user.id },
                 process.env.ACCESS_TOKEN_SECRET || 'sqJm1mSnOI',
-                { expiresIn: '1h' }
+                { expiresIn: '12h' }
             )
         })
     } catch (e) {

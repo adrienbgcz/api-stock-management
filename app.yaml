@@ -1,8 +1,40 @@
 runtime: nodejs16
 
+#env_variables:
+ # DB_USER: "enzoavlt_stock_management"
+  #DB_HOST: "postgresql-enzoavlt.alwaysdata.net"
+ # DB_NAME: "enzoavlt_stock_management"
+ # DB_PASSWORD: "flutterproject"
+  #DB_PORT: 5432
+
 env_variables:
-  DB_USER: "enzoavlt_stock_management"
-  DB_HOST: "postgresql-enzoavlt.alwaysdata.net"
-  DB_NAME: "enzoavlt_stock_management"
-  DB_PASSWORD: "flutterproject"
-  DB_PORT: 5432
+  DB_USER: >-
+    {{{
+      "name": "projects/428687573784/secrets/DB_USER/versions/latest",
+      "version": "latest",
+      "env": "production"
+    }}}
+  DB_HOST: >-
+    {{{
+      "name": "projects/428687573784/secrets/DB_HOST/versions/latest",
+      "version": "latest",
+      "env": "production"
+    }}}
+  DB_NAME: >-
+    {{{
+      "name": "projects/428687573784/secrets/DB_NAME/versions/latest",
+      "version": "latest",
+      "env": "production"
+    }}}
+  DB_PASSWORD: >-
+    {{{
+      "name": "projects/428687573784/secrets/DB_PASSWORD/versions/latest",
+      "version": "latest",
+      "env": "production"
+    }}}
+  DB_PORT: >-
+    {{{
+      "name": "projects/428687573784/secrets/DB_PORT/versions/latest",
+      "version": "latest",
+      "env": "production"
+    }}}

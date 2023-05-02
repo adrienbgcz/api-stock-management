@@ -1,6 +1,6 @@
 import express from "express";
 const app = express();
-const port = process.env.PORT || 3008;
+const port = process.env.PORT || 3009;
 import cors from "cors";
 
 import customerEndpoint from "./controller/customer-controller.js";
@@ -21,8 +21,8 @@ app.get("/", (req, res) => {
 });
 
 app.use("/", loginEndpoint)
+app.use('/', auth.authenticateToken)
 app.use("/", userEndpoint)
-/*app.use('/', auth.authenticateToken)*/
 app.use("/", customerEndpoint);
 app.use("/", deviceEndpoint);
 app.use("/", billEndpoint);

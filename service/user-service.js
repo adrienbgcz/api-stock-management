@@ -5,7 +5,6 @@ export default {
     async getUser(id) {
         try {
             let user = await userDao.findUserById(id)
-            console.log(user)
             return {
                 userId: user.id,
                 email: user.email,

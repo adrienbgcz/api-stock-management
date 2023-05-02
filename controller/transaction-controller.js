@@ -40,7 +40,6 @@ router.get('/transactions/customer/:id', async (req, res) => {
 
 router.post('/transactions', async (req, res) => {
     try {
-        console.log(req.body)
         const id = await transactionService.createTransaction(req.body);
         res.json(id)
     } catch (e) {

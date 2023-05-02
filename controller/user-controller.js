@@ -1,26 +1,12 @@
 import express from "express";
 const router = express.Router();
 import userServices from '../service/user-service.js'
-/*import jwt from 'jsonwebtoken'*/
-
-/*router.get('/merchantsUsers', async (req, res) => {
-    let users = []
-    try {
-        users = await userServices.getUsers();
-
-    } catch (e) {
-        console.error(e)
-        res.status(500).send('Internal server error')
-    }
-    res.json(users);
-})*/
 
 
 router.get('/users/:id', async (req, res) => {
     let user = {}
     try {
         user = await userServices.getUser(req.params.id);
-        console.log(user)
     } catch (e) {
         console.error(e)
         res.status(500).send('Internal server error')

@@ -2,7 +2,6 @@ import jwt from 'jsonwebtoken'
 
 export default {
     authenticateToken(req, res, next) {
-        console.log("ici",req.auth)
         if(req.headers && req.headers.authorization) {
             try {
                 const token = req.headers.authorization.split(' ')[1]
