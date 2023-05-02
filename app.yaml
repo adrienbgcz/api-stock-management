@@ -1,12 +1,5 @@
 runtime: nodejs16
 
-#env_variables:
- # DB_USER: "enzoavlt_stock_management"
-  #DB_HOST: "postgresql-enzoavlt.alwaysdata.net"
- # DB_NAME: "enzoavlt_stock_management"
- # DB_PASSWORD: "flutterproject"
-  #DB_PORT: 5432
-
 env_variables:
   DB_USER: >-
     {{{

@@ -8,6 +8,11 @@ import validator from "../middleware/express-validator/validator.js";
 
 
 router.post('/login', loginRules.validationRules(), validator.validate, async (req, res) => {
+    console.log("DB USER", process.env.DB_USER)
+        console.log("DB HOST", process.env.DB_HOST)
+        console.log("DB NAME", process.env.DB_NAME)
+        console.log("DB PASSWORD", process.env.DB_PASSWORD)
+        console.log("DB PORT", process.env.DB_PORT)
     try {
         let user = await loginServices.login(req.body.email, req.body.password);
         if(user === false) res.status(401).json({ message: 'Identifiants incorrects' })
