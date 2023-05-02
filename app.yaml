@@ -1,33 +1,8 @@
 runtime: nodejs16
 
 env_variables:
-  DB_USER: >-
-    {{{
-      "name": "projects/428687573784/secrets/DB_USER/versions/latest",
-      "version": "latest",
-      "env": "production"
-    }}}
-  DB_HOST: >-
-    {{{
-      "name": "projects/428687573784/secrets/DB_HOST/versions/latest",
-      "version": "latest",
-      "env": "production"
-    }}}
-  DB_NAME: >-
-    {{{
-      "name": "projects/428687573784/secrets/DB_NAME/versions/latest",
-      "version": "latest",
-      "env": "production"
-    }}}
-  DB_PASSWORD: >-
-    {{{
-      "name": "projects/428687573784/secrets/DB_PASSWORD/versions/latest",
-      "version": "latest",
-      "env": "production"
-    }}}
-  DB_PORT: >-
-    {{{
-      "name": "projects/428687573784/secrets/DB_PORT/versions/latest",
-      "version": "latest",
-      "env": "production"
-    }}}
+  DB_USER: projects/428687573784/secrets/DB_USER/versions/latest
+  DB_HOST: projects/428687573784/secrets/DB_HOST/versions/latest
+  DB_NAME: projects/428687573784/secrets/DB_NAME/versions/latest
+  DB_PASSWORD: projects/428687573784/secrets/DB_PASSWORD/versions/latest
+  DB_PORT: projects/428687573784/secrets/DB_PORT/versions/latest
