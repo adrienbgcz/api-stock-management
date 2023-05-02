@@ -1,5 +1,5 @@
 import { query } from "express";
-import db from "../connectionDb/db.js";
+import db from "../utils/db.js";
 
 
 export default {

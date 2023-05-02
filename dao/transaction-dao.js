@@ -1,4 +1,4 @@
-import db from "../connectionDb/db.js";
+import db from "../utils/db.js";
 import format from 'pg-format';
 
 export default {
