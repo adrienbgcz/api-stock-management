@@ -1,5 +1,5 @@
 import pkg from 'pg'
-import GcpSecrets from '../utils/gcp-secrets'
+import GcpSecrets from '../utils/gcp-secrets.js'
 const {Pool} = pkg
 
 const db = new Pool({

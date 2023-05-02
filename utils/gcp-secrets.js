@@ -1,7 +1,8 @@
-const {SecretManagerServiceClient} = require('@google-cloud/secret-manager');
+import {SecretManagerServiceClient} from "@google-cloud/secret-manager";
 const client = new SecretManagerServiceClient();
 
 export default {
+
     async getSecretValue(secret, v = "latest") {
         const [version] = await client.accessSecretVersion({
             name: `projects/${process.env.GOOGLE_CLOUD_PROJECT}/secrets/${secret}/versions/${v}`,
@@ -10,5 +11,7 @@ export default {
         console.log("SECRET VALUE", payload)
         return payload;
     }
+
 }
+
 
