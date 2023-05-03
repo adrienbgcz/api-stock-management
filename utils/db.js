@@ -11,6 +11,14 @@ const db = new Pool({
 })
 
 /*const db = new Pool({
+    user : await GcpSecrets.getSecretValue("db_user"),
+    host : await GcpSecrets.getSecretValue("db_host"),
+    database : await GcpSecrets.getSecretValue("db_name"),
+    password : await GcpSecrets.getSecretValue("db_password"),
+    port : await GcpSecrets.getSecretValue("db_port")
+})*/
+
+/*const db = new Pool({
     user : "enzoavlt_stock_management",
     host : "postgresql-enzoavlt.alwaysdata.net",
     database : "enzoavlt_stock_management",

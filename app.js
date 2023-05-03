@@ -1,6 +1,6 @@
 import express from "express";
 const app = express();
-const port = process.env.PORT || 3009;
+const port = process.env.PORT || 3030;
 import cors from "cors";
 
 import customerEndpoint from "./controller/customer-controller.js";
