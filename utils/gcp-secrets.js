@@ -10,7 +10,6 @@ export default {
                 name: `projects/${process.env.GOOGLE_CLOUD_PROJECT}/secrets/${secret}/versions/${v}`,
             });
             payload = version.payload.data.toString('utf8');
-            console.log("SECRET VALUE", payload)
         } catch(e){
             console.error(e)
         }

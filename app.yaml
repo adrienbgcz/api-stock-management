@@ -6,3 +6,4 @@ env_variables:
   DB_NAME: db_name
   DB_PASSWORD: db_password
   DB_PORT: db_port
+  SECRET_ACCESS_TOKEN: secret_access_token
