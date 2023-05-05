@@ -7,7 +7,9 @@ export default {
         if(req.headers && req.headers.authorization) {
             try {
                 const token = req.headers.authorization.split(' ')[1]
-                const decodedToken = jwt.verify(token, await GcpSecrets.getSecretValue(process.env.SECRET_ACCESS_TOKEN))
+                console.log("TOKEN", token)
+                const decodedToken = jwt.verify(token /*await GcpSecrets.getSecretValue(process.env.SECRET_ACCESS_TOKEN*/)
+                console.log("DECODED TOKEN", decodedToken)
                 /*const userId = decodedToken.userId
                 req.auth = {
                     userId
