@@ -2,9 +2,9 @@ import deviceDao from "../dao/device-dao.js";
 
 export default {
 
-    async getDevices() {
+    async getDevicesByUser(userId) {
         try {
-            let devices = await deviceDao.findAllDevices()
+            let devices = await deviceDao.findAllDevicesByUser(userId)
             return devices
         } catch (e) {
             console.error(e)

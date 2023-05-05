@@ -5,10 +5,10 @@ import db from "../utils/db.js";
 export default {
 
 
-    async findAllDevices() {
+    async findAllDevicesByUser(userId) {
         let devices = []
         try {
-            const query = await db.query('SELECT * FROM device')
+            const query = await db.query('SELECT * FROM device WHERE user_id = $1', [userId])
             devices = query.rows;
         } catch(e) {
             console.error(e)
