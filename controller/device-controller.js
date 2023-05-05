@@ -3,7 +3,7 @@ import deviceService from "../service/device-service.js";
 const router = express.Router();
 
 
-router.get('/devices/:userId', async (req, res) => {
+router.get('/devices/user/:userId', async (req, res) => {
     let devices = []
     try {
         devices = await deviceService.getDevicesByUser(req.params.userId);
