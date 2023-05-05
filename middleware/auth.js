@@ -7,10 +7,10 @@ export default {
             try {
                 const token = req.headers.authorization.split(' ')[1]
                 const decodedToken = jwt.verify(token, await GcpSecrets.getSecretValue(process.env.SECRET_ACCESS_TOKEN))
-                const userId = decodedToken.userId
+                /*const userId = decodedToken.userId
                 req.auth = {
                     userId
-                }
+                }*/
                 next()
             } catch(e) {
                 res.status(401).json({e})
