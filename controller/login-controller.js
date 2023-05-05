@@ -4,6 +4,7 @@ import loginServices from '../service/login-service.js'
 import jwt from 'jsonwebtoken'
 import loginRules from "../middleware/express-validator/loginRules.js";
 import validator from "../middleware/express-validator/validator.js";
+import GcpSecrets from "../utils/gcp-secrets.js";
 
 
 
@@ -16,7 +17,7 @@ router.post('/login', loginRules.validationRules(), validator.validate, async (r
             user,
             token: jwt.sign(
                 { userId : user.id },
-                process.env.ACCESS_TOKEN_SECRET || 'sqJm1mSnOI',
+                await GcpSecrets.getSecretValue(process.env.SECRET_ACCESS_TOKEN),
                 { expiresIn: '12h' }
             )
         })

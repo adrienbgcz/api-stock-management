@@ -21,6 +21,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/", loginEndpoint)
+
 app.use('/', auth.authenticateToken)
 app.use("/", userEndpoint)
 app.use("/", customerEndpoint);
