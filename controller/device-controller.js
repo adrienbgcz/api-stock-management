@@ -30,15 +30,11 @@ router.get('/devices/:idOrSerialNumber', async (req, res) => {
 })
 
 
-
-
-
-
-
 router.post('/devices', async (req, res) => {
+    const device = req.body
     try {
-        const id = await deviceService.createDevice(req.body);
-        res.json(id)
+        const id = await deviceService.createDevice(device);
+        res.status(200).json(id)
     } catch (e) {
         console.error(e)
         res.status(500).send('Internal server error')

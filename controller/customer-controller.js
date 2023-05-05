@@ -29,9 +29,9 @@ router.get('/customers/:id', async (req, res) => {
 })
 
 router.post('/customers', async (req, res) => {
-    let customer = {}
+    let customer = req.body
     try {
-        customer = await customerService.createCustomer(req.body);
+        await customerService.createCustomer(customer)
         res.status(200).send()
     } catch (e) {
         console.error(e)

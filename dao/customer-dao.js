@@ -29,9 +29,10 @@ export default {
         const companyName = customer.company_name
         const siret = customer.siret
         const phoneNumber = customer.phone_number
+        const userId = customer.user_id
 
         try {
-            const query = await db.query('INSERT INTO customer (company_name, siret, phone_number) VALUES ($1, $2, $3)', [companyName, siret, phoneNumber])
+            await db.query('INSERT INTO customer (company_name, siret, phone_number, user_id) VALUES ($1, $2, $3, $4)', [companyName, siret, phoneNumber, userId])
         } catch(e) {
             console.error(e)
             throw e
