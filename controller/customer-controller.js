@@ -3,10 +3,10 @@ import customerService from "../service/customer-service.js";
 const router = express.Router();
 
 
-router.get('/customers', async (req, res) => {
+router.get('/customers/:userId', async (req, res) => {
     let customers = []
     try {
-        customers = await customerService.getCustomers();
+        customers = await customerService.getCustomersByUser(req.params.userId);
 
     } catch (e) {
         console.error(e)

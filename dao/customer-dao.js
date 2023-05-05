@@ -14,10 +14,10 @@ export default {
         return user;
     },
 
-    async findAllCustomers() {
+    async findAllCustomersByUser(userId) {
         let customers = []
         try {
-            const query = await db.query('SELECT * FROM customer')
+            const query = await db.query('SELECT * FROM customer WHERE id_user = $1', [userId])
             customers = query.rows;
         } catch(e) {
             console.error(e)

@@ -2,9 +2,9 @@ import customerDao from "../dao/customer-dao.js";
 
 export default {
 
-    async getCustomers() {
+    async getCustomersByUser(userId) {
         try {
-            let customers = await customerDao.findAllCustomers()
+            let customers = await customerDao.findAllCustomersByUser(userId)
             return customers
         } catch (e) {
             console.error(e)
