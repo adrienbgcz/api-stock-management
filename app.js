@@ -9,6 +9,7 @@ import billEndpoint from "./controller/bill-controller.js";
 import transactionEndpoint from "./controller/transaction-controller.js";
 import userEndpoint from "./controller/user-controller.js";
 import loginEndpoint from "./controller/login-controller.js"
+import signupEndpoint from "./controller/signup-controller.js"
 import auth from "./middleware/auth.js"
 
 
@@ -21,7 +22,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/", loginEndpoint)
-
+app.use("/", signupEndpoint)
 app.use('/', auth.authenticateToken)
 app.use("/", userEndpoint)
 app.use("/", customerEndpoint);
