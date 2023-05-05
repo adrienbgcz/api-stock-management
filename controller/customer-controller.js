@@ -7,12 +7,12 @@ router.get('/customers/:userId', async (req, res) => {
     let customers = []
     try {
         customers = await customerService.getCustomersByUser(req.params.userId);
-
+        res.json(customers);
     } catch (e) {
         console.error(e)
         res.status(500).send('Internal server error')
     }
-    res.json(customers);
+
 })
 
 

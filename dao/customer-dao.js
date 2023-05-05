@@ -17,7 +17,7 @@ export default {
     async findAllCustomersByUser(userId) {
         let customers = []
         try {
-            const query = await db.query('SELECT * FROM customer WHERE id_user = $1', [userId])
+            const query = await db.query('SELECT * FROM customer WHERE user_id = $1', [userId])
             customers = query.rows;
         } catch(e) {
             console.error(e)
