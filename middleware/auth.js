@@ -3,6 +3,7 @@ import GcpSecrets from '../utils/gcp-secrets.js'
 
 export default {
     async authenticateToken(req, res, next) {
+        console.log("HEADERS", req.headers)
         if(req.headers && req.headers.authorization) {
             try {
                 const token = req.headers.authorization.split(' ')[1]
@@ -15,8 +16,8 @@ export default {
             } catch(e) {
                 res.status(401).json({e})
             }
+        } else {
+            res.status(401).json("Unauthorized")
         }
-
-
     }
 }
