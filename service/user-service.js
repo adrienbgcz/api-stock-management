@@ -14,5 +14,14 @@ export default {
             console.error(e)
             throw e
         }
-    }
+    },
+
+    /*async saveToken(userId, token) {
+        try {
+            await userDao.updateToken(userId, token)
+        } catch (e) {
+            console.error(e)
+            throw e
+        }
+    }*/
 }

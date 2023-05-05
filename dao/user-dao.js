@@ -1,5 +1,5 @@
 import db from '../utils/db.js'
-import bcrypt from 'bcrypt'
+
 
 export default {
     async findUserById(id) {
@@ -12,7 +12,17 @@ export default {
             throw e
         }
         return user;
-    }
+    },
+
+   /* async updateToken(userId, token){
+        console.log(userId, token)
+        try{
+            await db.query('UPDATE "user" SET token = $1 WHERE id = $2 ', [token, userId])
+        } catch(e) {
+            console.log(e)
+            throw e
+        }
+    }*/
 }
 
 

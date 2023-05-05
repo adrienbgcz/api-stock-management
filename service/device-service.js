@@ -14,9 +14,9 @@ export default {
     },
 
 
-    async getDeviceByIdOrSerialNumber(isScan, idOrSerialNumber) {
+    async getDeviceByIdOrSerialNumber(isScan, idOrSerialNumber, userId) {
         try {
-            let device = await deviceDao.findDeviceByIdOrSerialNumber(isScan, idOrSerialNumber)
+            let device = await deviceDao.findDeviceByIdOrSerialNumber(isScan, idOrSerialNumber, userId)
             return device
         } catch (e) {
             console.error(e)

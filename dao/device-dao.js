@@ -17,14 +17,14 @@ export default {
         return devices;
     },
 
-    async findDeviceByIdOrSerialNumber(isScan, idOrSerialNumber) {
+    async findDeviceByIdOrSerialNumber(isScan, idOrSerialNumber, userId) {
         let device = []
         try {
             if(isScan === "true") {
-                const query = await db.query('SELECT * FROM device WHERE serial_number = $1', [idOrSerialNumber])
+                const query = await db.query('SELECT * FROM device WHERE serial_number = $1 AND user_id = $2', [idOrSerialNumber, userId])
                 device = query.rows;
             } else {
-                const query = await db.query('SELECT * FROM device WHERE id = $1', [parseInt(idOrSerialNumber)])
+                const query = await db.query('SELECT * FROM device WHERE id = $1 AND user_id = $2', [parseInt(idOrSerialNumber), userId])
                 device = query.rows;
             }
         } catch(e) {
