@@ -31,8 +31,8 @@ router.get('/customers/:id', async (req, res) => {
 router.post('/customers', async (req, res) => {
     let customer = req.body
     try {
-        await customerService.createCustomer(customer)
-        res.status(200).send()
+        const customerCreated = await customerService.createCustomer(customer)
+        res.status(200).json({customerCreated})
     } catch (e) {
         console.error(e)
         res.status(500).send('Internal server error')

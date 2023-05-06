@@ -43,8 +43,8 @@ export default {
         const userId = device.user_id
 
         try {
-            const query = await db.query('INSERT INTO device (name, price, stock_quantity, serial_number, picture, user_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"', [name, price, stockQuantity, serialNumber, picture, userId])
-            return query.rows[0].id
+            const idNewProduct = await db.query('INSERT INTO device (name, price, stock_quantity, serial_number, picture, user_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"', [name, price, stockQuantity, serialNumber, picture, userId])
+            return {...device, id: idNewProduct.rows[0].id}
         } catch(e) {
             console.error(e)
             throw e

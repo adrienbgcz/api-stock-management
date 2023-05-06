@@ -27,7 +27,7 @@ export default {
 
     async createCustomer(customer) {
         try {
-            await customerDao.postCustomer(customer)
+            return await customerDao.postCustomer(customer)
         } catch (e) {
             console.error(e)
             throw e

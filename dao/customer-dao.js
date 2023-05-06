@@ -32,7 +32,8 @@ export default {
         const userId = customer.user_id
 
         try {
-            await db.query('INSERT INTO customer (company_name, siret, phone_number, user_id) VALUES ($1, $2, $3, $4)', [companyName, siret, phoneNumber, userId])
+            const idNewCustomer = await db.query('INSERT INTO customer (company_name, siret, phone_number, user_id) VALUES ($1, $2, $3, $4) RETURNING "id" ', [companyName, siret, phoneNumber, userId])
+            return {...customer, id: idNewCustomer.rows[0].id}
         } catch(e) {
             console.error(e)
             throw e
