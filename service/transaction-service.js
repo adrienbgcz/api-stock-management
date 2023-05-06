@@ -45,7 +45,7 @@ export default {
 
     async updateTransaction(transaction, id) {
         try {
-            let transactionToUpdate = await transactionDao.putTransaction(id,transaction.quantity,transaction.buying,transaction.device_id,transaction.customer_id,transaction.bill_id)
+            let transactionToUpdate = await transactionDao.putTransaction(id,transaction.quantity,transaction.device_id,transaction.customer_id,transaction.bill_id)
         } catch (e) {
             console.error(e)
             throw e
