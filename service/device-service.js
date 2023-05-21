@@ -22,6 +22,16 @@ export default {
             console.error(e)
             throw e
         }
+    },
+
+    async getDeviceById(id) {
+        try {
+            let device = await deviceDao.findDeviceById(id)
+            return device
+        } catch (e) {
+            console.error(e)
+            throw e
+        }
 
     },
 
@@ -37,6 +47,15 @@ export default {
     async updateDevice(device, id) {
         try {
             let deviceToUpdate = await deviceDao.putDevice(device, id)
+        } catch (e) {
+            console.error(e)
+            throw e
+        }
+    },
+
+    async updateDeviceQuantity(id, quantity) {
+        try {
+            await deviceDao.updateQuantity(id, quantity)
         } catch (e) {
             console.error(e)
             throw e

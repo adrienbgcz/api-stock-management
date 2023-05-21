@@ -34,13 +34,8 @@ export default {
     },
 
     async createTransaction(transactions) {
-        try {
-            let id = await transactionDao.postTransaction(transactions)
-            return id;
-        } catch (e) {
-            console.error(e)
-            throw e
-        }
+        let id = await transactionDao.postTransaction(transactions)
+        return id;
     },
 
     async updateTransaction(transaction, id) {

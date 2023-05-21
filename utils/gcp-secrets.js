@@ -13,10 +13,8 @@ export default {
         } catch(e){
             console.error(e)
         }
-
         return payload;
     }
-
 }
 
 

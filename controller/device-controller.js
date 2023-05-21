@@ -3,9 +3,13 @@ import deviceService from "../service/device-service.js";
 import jwt from "jsonwebtoken";
 import GcpSecrets from "../utils/gcp-secrets.js";
 const router = express.Router();
+import deviceRules from "../middleware/express-validator/deviceRules.js";
+import validator from "../middleware/express-validator/validator.js";
 
 
 router.get('/devices/user/:userId', async (req, res) => {
+
+    if(req.auth.userId.toString() !== req.params.id.toString()) { res.status(401).json("Unauthorized") }
 
     let devices = []
     try {
@@ -41,8 +45,9 @@ router.get('/devices/:idOrSerialNumber/user/:userId', async (req, res) => {
 })
 
 
-router.post('/devices', async (req, res) => {
+router.post('/devices', deviceRules.validationRules(), validator.validate, async (req, res) => {
     const device = req.body
+    if(req.auth.userId.toString() !== req.body.user_id.toString()) { res.status(401).json("Unauthorized") }
     try {
         const deviceCreated = await deviceService.createDevice(device);
         res.status(200).json({deviceCreated})

@@ -28,12 +28,17 @@ export default {
 
     async postBill(date){
         try{
-            const query = await db.query('INSERT INTO bill (bill_date) VALUES ($1) RETURNING "id"', [date])
+            /*const query = await db.query('INSERT INTO bill (bill_date) VALUES ($1) RETURNING "id"', [date])*/
+            const query = await this.sendBillInDb(date)
             return query.rows[0].id
         } catch(e) {
             console.error(e)
             throw e
         }
+    },
+
+    async sendBillInDb(date) {
+        return await db.query('INSERT INTO bill (bill_date) VALUES ($1) RETURNING "id"', [date])
     },
 
     async putBill(id,date){
@@ -45,3 +50,4 @@ export default {
         }
     }
 }
+

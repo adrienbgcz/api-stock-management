@@ -1,5 +1,7 @@
 import express from "express";
 import billService from "../service/bill-service.js";
+import billRules from "../middleware/express-validator/billRules.js";
+import validator from "../middleware/express-validator/validator.js";
 const router = express.Router();
 
 
@@ -27,7 +29,9 @@ router.get('/bills/:id', async (req, res) => {
     res.json(bill);
 })
 
-router.post('/bills', async (req, res) => {
+
+
+router.post('/bills', billRules.validationRules(), validator.validate, async (req, res) => {
     try {
         const id = await billService.createBill(req.body);
         res.json(id)
@@ -36,6 +40,9 @@ router.post('/bills', async (req, res) => {
         res.status(500).send('Internal server error')
     }
 })
+
+
+
 
 router.put('/bills/:id', async (req, res) => {
     let bill = {}

@@ -1,5 +1,7 @@
 import db from "../utils/db.js";
 import format from 'pg-format';
+import deviceService from "../service/device-service.js";
+import * as http from "http";
 
 export default {
     async findTransactionById(id) {
@@ -38,15 +40,22 @@ export default {
         return transactions
     },
 
-    //GET A ARRAY OF ARRAY => [[1,1,1],[2,2,1]]
-    async postTransaction(transactions){
-        try{
-            const query = await db.query(format(`INSERT INTO transaction (quantity, device_id, customer_id, bill_id) VALUES %L`, transactions), [])
-        } catch(e) {
-            console.error(e)
-            throw e
-        }
+    // transaction = [quantity, device_id, customer_id, bill_id]
+    // transactions : Array of transactions => [[1,1,1,1],[2,2,1,2]]
+    async postTransaction(transactions) {
+            await Promise.all(transactions.map(async transaction => {
+                const device = await deviceService.getDeviceById(transaction[1]);
+                const quantityUpdated = device[0].stock_quantity - transaction[0];
+                if(quantityUpdated >= 0) {
+                    await deviceService.updateDeviceQuantity(transaction[2], quantityUpdated)
+                } else {
+                    throw new Error(`The stock quantity for the device ${transaction[1]} is ${device[0].stock_quantity}. Please choose an available quantity`);
+                }
+            }));
+
+            await db.query(format(`INSERT INTO transaction (quantity, device_id, customer_id, bill_id) VALUES %L`, transactions), [])
     },
+
 
     async putTransaction(id, quantity, device_id, customer_id, bill_id){
         try{

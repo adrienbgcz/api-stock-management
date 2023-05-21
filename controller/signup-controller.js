@@ -4,9 +4,11 @@ import signupServices from '../service/signup-service.js'
 import loginService from "../service/login-service.js";
 import jwt from "jsonwebtoken";
 import GcpSecrets from "../utils/gcp-secrets.js";
+import signUpRules from "../middleware/express-validator/signUpRules.js";
+import validator from "../middleware/express-validator/validator.js";
 
 
-router.post('/signup', async (req, res) => {
+router.post('/signup', signUpRules.validationRules(), validator.validate, async (req, res) => {
     let userToCreate = req.body
     try {
         await signupServices.createUser(userToCreate);

@@ -1,10 +1,15 @@
 import express from "express";
 import customerService from "../service/customer-service.js";
 const router = express.Router();
+import customerRules from "../middleware/express-validator/customerRules.js";
+import validator from "../middleware/express-validator/validator.js";
 
 
 router.get('/customers/user/:userId', async (req, res) => {
     let customers = []
+
+    if(req.auth.userId.toString() !== req.params.id.toString()) { res.status(401).json("Unauthorized") }
+
     try {
         customers = await customerService.getCustomersByUser(req.params.userId);
         res.json(customers);
@@ -28,8 +33,9 @@ router.get('/customers/:id', async (req, res) => {
     res.json(customer);
 })
 
-router.post('/customers', async (req, res) => {
+router.post('/customers', customerRules.validationRules(), validator.validate, async (req, res) => {
     let customer = req.body
+    if(req.auth.userId.toString() !== req.body.user_id.toString()) { res.status(401).json("Unauthorized") }
     try {
         const customerCreated = await customerService.createCustomer(customer)
         res.status(200).json({customerCreated})
