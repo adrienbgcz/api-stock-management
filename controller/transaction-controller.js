@@ -1,5 +1,7 @@
 import express from "express";
 import transactionService from "../service/transaction-service.js";
+import transactionRules from "../middleware/express-validator/transactionRules.js";
+import validator from "../middleware/express-validator/validator.js";
 const router = express.Router();
 
 
@@ -38,7 +40,7 @@ router.get('/transactions/customer/:id', async (req, res) => {
     res.json(transactions)
 })
 
-router.post('/transactions', async (req, res) => {
+router.post('/transactions', transactionRules.validationRules(), validator.validate, async (req, res) => {
     const transactions = req.body;
     transactions.forEach(transaction => {
         transaction.forEach(element => {
