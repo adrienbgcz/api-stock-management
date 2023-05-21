@@ -1,17 +1,16 @@
 import db from "../utils/db.js";
 
-
 export default {
     async findCustomerById(id) {
         let user = []
         try {
             const query = await db.query('SELECT * FROM customer WHERE id = $1', [id])
-            user = query.rows;
+            user = query.rows
         } catch(e) {
             console.error(e)
             throw e
         }
-        return user;
+        return user
     },
 
     async findAllCustomersByUser(userId) {
