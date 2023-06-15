@@ -47,7 +47,7 @@ export default {
                 const device = await deviceService.getDeviceById(transaction[1]);
                 const quantityUpdated = device[0].stock_quantity - transaction[0];
                 if(quantityUpdated >= 0) {
-                    await deviceService.updateDeviceQuantity(transaction[2], quantityUpdated)
+                    await deviceService.updateDeviceQuantity(transaction[1], quantityUpdated)
                 } else {
                     throw new Error(`The stock quantity for the device ${transaction[1]} is ${device[0].stock_quantity}. Please choose an available quantity`);
                 }

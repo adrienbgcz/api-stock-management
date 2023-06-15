@@ -46,6 +46,7 @@ router.get('/devices/:idOrSerialNumber/user/:userId', async (req, res) => {
 
 
 router.post('/devices', deviceRules.validationRules(), validator.validate, async (req, res) => {
+    console.log('ici')
     const device = req.body
     if(req.auth.userId.toString() !== req.body.user_id.toString()) { res.status(401).json("Unauthorized") }
     try {

@@ -83,6 +83,8 @@ export default {
         const idDevice = id
         const stockQuantity = quantity
 
+        console.log(quantity)
+        console.log(id)
         try {
             await db.query('UPDATE device SET stock_quantity = $1  WHERE id = $2', [stockQuantity, idDevice])
         } catch(e) {

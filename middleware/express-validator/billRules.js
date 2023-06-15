@@ -1,4 +1,3 @@
-/*const { body } = require("express-validator");*/
 import validator from 'express-validator'
 const { body } = validator
 

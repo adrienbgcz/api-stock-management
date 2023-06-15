@@ -7,8 +7,7 @@ import validator from "../middleware/express-validator/validator.js";
 
 router.get('/customers/user/:userId', async (req, res) => {
     let customers = []
-
-    if(req.auth.userId.toString() !== req.params.id.toString()) { res.status(401).json("Unauthorized") }
+    if(req.auth.userId.toString() !== req.params.userId.toString()) { res.status(401).json("Unauthorized") }
 
     try {
         customers = await customerService.getCustomersByUser(req.params.userId);

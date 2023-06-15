@@ -34,8 +34,7 @@ export default {
     },
 
     async createTransaction(transactions) {
-        let id = await transactionDao.postTransaction(transactions)
-        return id;
+        return await transactionDao.postTransaction(transactions)
     },
 
     async updateTransaction(transaction, id) {
@@ -47,3 +46,11 @@ export default {
         }
     }
 }
+
+
+
+
+
+
+
+

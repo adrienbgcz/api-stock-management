@@ -49,8 +49,8 @@ router.post('/transactions', transactionRules.validationRules(), validator.valid
     })
 
     try {
-        const id = await transactionService.createTransaction(req.body);
-        res.json(id)
+        await transactionService.createTransaction(req.body);
+        res.status(200).send()
     } catch(e) {
         console.error(e)
         res.status(400).json({ error: e.message || 'Internal server error.' })

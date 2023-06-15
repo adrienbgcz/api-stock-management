@@ -16,7 +16,7 @@ export default {
                 .withMessage("Invalid serial number format"),
             body("price")
                 .exists().withMessage("Price is empty")
-                .isLength({min: 2, max: 20}).withMessage("Price must contain between 1 and 13 characters")
+                .isLength({min: 1, max: 20}).withMessage("Price must contain between 1 and 13 characters")
                 .matches(/^[0-9]{1,10}(\.[0-9]{0,2})?$/)
                 .withMessage("Invalid price format"),
             body("stock_quantity")
