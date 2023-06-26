@@ -1,18 +1,22 @@
 import express from "express";
 import customerService from "../service/customer-service.js";
 const router = express.Router();
+import customerRules from "../middleware/express-validator/customerRules.js";
+import validator from "../middleware/express-validator/validator.js";
 
 
-router.get('/customers', async (req, res) => {
+router.get('/customers/user/:userId', async (req, res) => {
     let customers = []
-    try {
-        customers = await customerService.getCustomers();
+    if(req.auth.userId.toString() !== req.params.userId.toString()) { res.status(401).json("Unauthorized") }
 
+    try {
+        customers = await customerService.getCustomersByUser(req.params.userId);
+        res.json(customers);
     } catch (e) {
         console.error(e)
         res.status(500).send('Internal server error')
     }
-    res.json(customers);
+
 })
 
 
@@ -28,11 +32,12 @@ router.get('/customers/:id', async (req, res) => {
     res.json(customer);
 })
 
-router.post('/customers', async (req, res) => {
-    let customer = {}
+router.post('/customers', customerRules.validationRules(), validator.validate, async (req, res) => {
+    let customer = req.body
+    if(req.auth.userId.toString() !== req.body.user_id.toString()) { res.status(401).json("Unauthorized") }
     try {
-        customer = await customerService.createCustomer(req.body);
-        res.status(200).send()
+        const customerCreated = await customerService.createCustomer(customer)
+        res.status(200).json({customerCreated})
     } catch (e) {
         console.error(e)
         res.status(500).send('Internal server error')

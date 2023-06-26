@@ -1,23 +1,22 @@
-import db from "../connectionDb/db.js";
-
+import db from "../utils/db.js";
 
 export default {
     async findCustomerById(id) {
         let user = []
         try {
             const query = await db.query('SELECT * FROM customer WHERE id = $1', [id])
-            user = query.rows;
+            user = query.rows
         } catch(e) {
             console.error(e)
             throw e
         }
-        return user;
+        return user
     },
 
-    async findAllCustomers() {
+    async findAllCustomersByUser(userId) {
         let customers = []
         try {
-            const query = await db.query('SELECT * FROM customer')
+            const query = await db.query('SELECT * FROM customer WHERE user_id = $1', [userId])
             customers = query.rows;
         } catch(e) {
             console.error(e)
@@ -29,9 +28,11 @@ export default {
         const companyName = customer.company_name
         const siret = customer.siret
         const phoneNumber = customer.phone_number
+        const userId = customer.user_id
 
         try {
-            const query = await db.query('INSERT INTO customer (company_name, siret, phone_number) VALUES ($1, $2, $3)', [companyName, siret, phoneNumber])
+            const idNewCustomer = await db.query('INSERT INTO customer (company_name, siret, phone_number, user_id) VALUES ($1, $2, $3, $4) RETURNING "id" ', [companyName, siret, phoneNumber, userId])
+            return {...customer, id: idNewCustomer.rows[0].id}
         } catch(e) {
             console.error(e)
             throw e

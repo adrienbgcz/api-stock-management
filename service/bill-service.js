@@ -24,13 +24,8 @@ export default {
     },
 
     async createBill(bill) {
-        try {
-            let id = await billDao.postBill(bill.date)
-            return id;
-        } catch (e) {
-            console.error(e)
-            throw e
-        }
+        let id = await billDao.postBill(bill.date)
+        return id;
     },
 
     async updateBill(bill, id) {
@@ -42,3 +37,13 @@ export default {
         }
     }
 }
+
+
+
+
+
+
+
+
+
+

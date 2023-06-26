@@ -1,5 +1,7 @@
 import express from "express";
 import transactionService from "../service/transaction-service.js";
+import transactionRules from "../middleware/express-validator/transactionRules.js";
+import validator from "../middleware/express-validator/validator.js";
 const router = express.Router();
 
 
@@ -38,14 +40,20 @@ router.get('/transactions/customer/:id', async (req, res) => {
     res.json(transactions)
 })
 
-router.post('/transactions', async (req, res) => {
+router.post('/transactions', transactionRules.validationRules(), validator.validate, async (req, res) => {
+    const transactions = req.body;
+    transactions.forEach(transaction => {
+        transaction.forEach(element => {
+            if(isNaN(parseInt(element))) res.status(400).json({ error: 'Invalid transaction format.' })
+        })
+    })
+
     try {
-        console.log(req.body)
-        const id = await transactionService.createTransaction(req.body);
-        res.json(id)
-    } catch (e) {
+        await transactionService.createTransaction(req.body);
+        res.status(200).send()
+    } catch(e) {
         console.error(e)
-        res.status(500).send('Internal server error')
+        res.status(400).json({ error: e.message || 'Internal server error.' })
     }
 })
 

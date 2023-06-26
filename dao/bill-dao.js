@@ -1,4 +1,4 @@
-import db from "../connectionDb/db.js";
+import db from "../utils/db.js";
 
 
 export default {
@@ -27,14 +27,11 @@ export default {
     },
 
     async postBill(date){
-        try{
-            const query = await db.query('INSERT INTO bill (bill_date) VALUES ($1) RETURNING "id"', [date])
-            return query.rows[0].id
-        } catch(e) {
-            console.error(e)
-            throw e
-        }
+        const query = await db.query('INSERT INTO bill (bill_date) VALUES ($1) RETURNING "id"', [date])
+        return query.rows[0].id
     },
+
+
 
     async putBill(id,date){
         try{
@@ -45,3 +42,4 @@ export default {
         }
     }
 }
+
