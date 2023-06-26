@@ -54,7 +54,6 @@ export default {
     },
 
     async updateDeviceQuantity(id, quantity) {
-        console.log(id, quantity)
         try {
             await deviceDao.updateQuantity(id, quantity)
         } catch (e) {

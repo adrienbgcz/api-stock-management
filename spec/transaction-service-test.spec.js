@@ -13,14 +13,14 @@ describe("Transaction service", function () {
 
         await Promise.all(transactions.map(async transaction => {
             const device = mockDevice
-            const quantityUpdated = device[0].stock_quantity - transaction[0];
+            const quantityUpdated = device[0].stock_quantity - transaction[0]
             if(quantityUpdated >= 0) {
                 await DeviceService.updateDeviceQuantity(transaction[1], quantityUpdated)
                 expect(DeviceService.updateDeviceQuantity).toHaveBeenCalled()
             } else {
-                throw new Error(`The stock quantity for the device ${transaction[1]} is ${device[0].stock_quantity}. Please choose an available quantity`);
+                throw new Error(`The stock quantity for the device ${transaction[1]} is ${device[0].stock_quantity}. Please choose an available quantity`)
             }
-        }));
+        }))
     })
 
     it("should not update device quantity if quantity asked is less important than quantity in stock", async () => {
@@ -35,7 +35,7 @@ describe("Transaction service", function () {
                 await DeviceService.updateDeviceQuantity(transaction[1], quantityUpdated)
                 expect(DeviceService.updateDeviceQuantity).not.toHaveBeenCalled()
             } else {
-                console.error(`The stock quantity for the device ${transaction[1]} is ${device[0].stock_quantity}. Please choose an available quantity`);
+                console.error(`The stock quantity for the device ${transaction[1]} is ${device[0].stock_quantity}. Please choose an available quantity`)
             }
         }));
     })

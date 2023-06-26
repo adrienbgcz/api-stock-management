@@ -13,37 +13,13 @@ describe("Bill service", function () {
         expect(BillDao.postBill).toHaveBeenCalled()
         expect(idNewBill).toEqual(1)
     })
-
-
 })
 
 function mockPostBill(postBillCallback) {
     spyOn(BillDao, "postBill").and.callFake(() => postBillCallback())
 }
 
-function mockSendBillInDb(sendBillInDbCallback = id) {
+function mockSendBillInDb(sendBillInDbCallback) {
     return sendBillInDbCallback
 }
 
-/*function mockGetSecretValue() {
-    spyOn(GcpSecrets, "getSecretValue").and.callFake(() => {})
-}*/
-
-/*
-function mockCreateTrack(createEditIdCallback: any,
-                         getServicesTrack: any,
-                         commitEdit:any,
-                         uploadApk:any = () => {},
-                         updateTrack:any = () => {},
-                         sendCloudTask:any = () => {},
-                         sendEventStatusCallback:any = () => {}
-) {
-    spyOn(EditService, "create").and.callFake(() => createEditIdCallback());
-    spyOn(AamTrackService, "getServicesTrack").and.callFake(() => getServicesTrack());
-    spyOn(ApkService, "upload").and.callFake(() => uploadApk);
-    spyOn(AamTrackService, "update").and.callFake(() => updateTrack);
-    spyOn(EditService, "commit").and.callFake(() => commitEdit);
-    spyOn(CloudTaskService, "sendTask").and.callFake(() => sendCloudTask);
-    spyOn(PubsubPublisherService, "sendEventStatus").and.callFake(sendEventStatusCallback);
-}
-*/
