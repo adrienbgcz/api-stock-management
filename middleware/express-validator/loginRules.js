@@ -11,7 +11,7 @@ export default {
                 .matches(/^[a-z0-9._\-]{2,30}@[a-z0-9]{2,30}\.[a-z]{2,4}$/).withMessage("Invalid adress format"),
             body("password")
                 .exists().withMessage("Password is empty")
-                .isLength({min: 2, max: 20}).withMessage("Password must contain between 8 and 20 characters")
+                .isLength({min: 8, max: 20}).withMessage("Password must contain between 8 and 20 characters")
                 .matches(/^((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%?=*&]).{8,20})$/)
                 .withMessage("Password must contain between 8 and 20 characters, including 1 lowcase letter, 1 capital letter et 1 special character"),
         ]
