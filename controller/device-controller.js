@@ -9,11 +9,11 @@ import validator from "../middleware/express-validator/validator.js";
 
 router.get('/devices/user/:userId', async (req, res) => {
 
-    if(req.auth.userId.toString() !== req.params.userId.toString()) { res.status(401).json("Unauthorized") }
+    if(req.auth.userId?.toString() !== req.params.userId?.toString()) { res.status(401).json("Unauthorized") }
 
     let devices = []
     try {
-        if(req.auth.userId.toString() === req.params.userId.toString()) {
+        if(req.auth.userId?.toString() === req.params.userId?.toString() ) {
             devices = await deviceService.getDevicesByUser(req.params.userId);
             res.json(devices);
         } else {

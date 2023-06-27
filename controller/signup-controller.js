@@ -16,7 +16,7 @@ router.post('/signup', signUpRules.validationRules(), validator.validate, async 
         res.status(200).json({
             user,
             token: jwt.sign(
-                { userId : user.id },
+                { userId : user.userId },
                 await GcpSecrets.getSecretValue(process.env.SECRET_ACCESS_TOKEN),
                 { expiresIn: '12h' }
             )
