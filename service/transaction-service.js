@@ -1,4 +1,5 @@
 import transactionDao from "../dao/transaction-dao.js"
+import deviceService from "./device-service.js";
 
 export default {
 
@@ -33,7 +34,18 @@ export default {
         }
     },
 
+    // transaction = [quantity, device_id, customer_id, bill_id]
+    // transactions : Array of transactions => [[1,1,1,1],[2,2,1,2]]
     async createTransaction(transactions) {
+        await Promise.all(transactions.map(async transaction => {
+            const device = await deviceService.getDeviceById(transaction[1]);
+            const quantityUpdated = device[0].stock_quantity - transaction[0];
+            if(quantityUpdated >= 0) {
+                await deviceService.updateDeviceQuantity(transaction[1], quantityUpdated)
+            } else {
+                throw new Error(`The stock quantity for the device ${transaction[1]} is ${device[0].stock_quantity}. Please choose an available quantity`);
+            }
+        }));
         return await transactionDao.postTransaction(transactions)
     },
 

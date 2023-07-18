@@ -4,6 +4,14 @@ const mockDevice = [{
     stock_quantity: 3
 }]
 
+function mockUpdateDeviceQuantity(updateDeviceQuantityCallback) {
+    spyOn(DeviceService, "updateDeviceQuantity").and.callFake(() => updateDeviceQuantityCallback())
+}
+
+function mockUpdateQuantity(updateQuantityCallback) {
+    return updateQuantityCallback
+}
+
 describe("Transaction service", function () {
 
     it("should update device quantity if quantity asked is more important than quantity in stock", async () => {
@@ -41,10 +49,3 @@ describe("Transaction service", function () {
     })
 })
 
-function mockUpdateDeviceQuantity(updateDeviceQuantityCallback) {
-    spyOn(DeviceService, "updateDeviceQuantity").and.callFake(() => updateDeviceQuantityCallback())
-}
-
-function mockUpdateQuantity(updateQuantityCallback) {
-    return updateQuantityCallback
-}

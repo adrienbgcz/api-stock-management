@@ -24,7 +24,7 @@ export default {
     },
 
     async createBill(bill) {
-        let id = await billDao.postBill(bill.date)
+        const id = await billDao.postBill(bill.date)
         return id;
     },
 

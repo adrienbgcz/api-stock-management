@@ -4,6 +4,7 @@ import userServices from '../service/user-service.js'
 
 
 router.get('/users/:id', async (req, res) => {
+    if(req.auth.userId?.toString() !== req.params.id?.toString()) { res.status(401).json("Unauthorized") }
     let user = {}
     try {
         user = await userServices.getUser(req.params.id);

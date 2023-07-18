@@ -1,7 +1,15 @@
 import BillDao from "../dao/bill-dao.js";
 import BillService from "../service/bill-service.js";
+
 const id = 1
 const billDate = {date: new Date(Date.now())}
+
+function mockPostBill(postBillCallback) {
+    spyOn(BillDao, "postBill").and.callFake(() => postBillCallback())
+}
+function mockSendBillInDb(sendBillInDbCallback) {
+    return sendBillInDbCallback
+}
 
 describe("Bill service", function () {
 
@@ -14,12 +22,4 @@ describe("Bill service", function () {
         expect(idNewBill).toEqual(1)
     })
 })
-
-function mockPostBill(postBillCallback) {
-    spyOn(BillDao, "postBill").and.callFake(() => postBillCallback())
-}
-
-function mockSendBillInDb(sendBillInDbCallback) {
-    return sendBillInDbCallback
-}
 
