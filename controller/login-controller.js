@@ -11,7 +11,7 @@ import userService from "../service/user-service.js";
 router.post('/login', loginRules.validationRules(), validator.validate, async (req, res) => {
     try {
         let user = await loginServices.login(req.body.email, req.body.password);
-        if(user === false) res.status(401).json({ message: 'Identifiants incorrects' })
+        if(!user.userId) return res.status(401).json({ message: 'Identifiants incorrects' })
 
         const token = jwt.sign(
             { userId : user.userId},

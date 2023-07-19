@@ -23,7 +23,11 @@ router.post('/signup', signUpRules.validationRules(), validator.validate, async 
         })
     } catch (e) {
         console.error(e)
-        res.status(500).send('An error occurred during user sign up')
+        if (e.status === 400) {
+            res.status(400).send(e.message)
+        } else {
+            res.status(500).send('An error occurred during user sign up')
+        }
     }
 
 })

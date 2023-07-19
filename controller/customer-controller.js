@@ -38,7 +38,6 @@ router.get('/customers/:customerId/user/:userId', async (req, res) => {
 
 
 router.get('/customers/:id', async (req, res) => {
-    console.log(req.params.id)
     if(req.params.id === undefined || isNaN(parseInt(req.params.id)) || (req.auth.userId?.toString() !== req.params.id.toString())) {
         { res.status(401).json("Unauthorized") }
     } else {
