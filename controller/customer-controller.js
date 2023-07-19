@@ -19,9 +19,27 @@ router.get('/customers/user/:userId', async (req, res) => {
 
 })
 
+router.get('/customers/:customerId/user/:userId', async (req, res) => {
+    if(req.params.userId === undefined || isNaN(parseInt(req.params.userId)) || (req.auth.userId?.toString() !== req.params.userId.toString())) {
+        { res.status(401).json("Unauthorized") }
+    } else {
+        let customer = {}
+        try {
+            customer = await customerService.getCustomer(req.params.customerId);
+
+        } catch (e) {
+            console.error(e)
+            res.status(500).send('Internal server error')
+        }
+        res.json(customer);
+    }
+})
+
+
 
 router.get('/customers/:id', async (req, res) => {
-    if(req.params.id === undefined || isNaN(req.params.id) || (req.auth.userId?.toString() !== req.params.id.toString())) {
+    console.log(req.params.id)
+    if(req.params.id === undefined || isNaN(parseInt(req.params.id)) || (req.auth.userId?.toString() !== req.params.id.toString())) {
         { res.status(401).json("Unauthorized") }
     } else {
         let customer = {}
