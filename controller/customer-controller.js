@@ -7,7 +7,7 @@ import validator from "../middleware/express-validator/validator.js";
 
 router.get('/customers/user/:userId', async (req, res) => {
     let customers = []
-    if(req.auth.userId.toString() !== req.params.userId.toString()) { res.status(401).json("Unauthorized") }
+    if(req.params.userId === undefined || (req.auth.userId.toString() !== req.params.userId.toString())) { res.status(401).json("Unauthorized") }
 
     try {
         customers = await customerService.getCustomersByUser(req.params.userId);
@@ -21,15 +21,19 @@ router.get('/customers/user/:userId', async (req, res) => {
 
 
 router.get('/customers/:id', async (req, res) => {
-    let customer = {}
-    try {
-        customer = await customerService.getCustomer(req.params.id);
+    if(req.params.id === undefined || isNaN(req.params.id) || (req.auth.userId?.toString() !== req.params.id.toString())) {
+        { res.status(401).json("Unauthorized") }
+    } else {
+        let customer = {}
+        try {
+            customer = await customerService.getCustomer(req.params.id);
 
-    } catch (e) {
-        console.error(e)
-        res.status(500).send('Internal server error')
+        } catch (e) {
+            console.error(e)
+            res.status(500).send('Internal server error')
+        }
+        res.json(customer);
     }
-    res.json(customer);
 })
 
 router.post('/customers', customerRules.validationRules(), validator.validate, async (req, res) => {
